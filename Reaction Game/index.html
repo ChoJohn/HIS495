@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <title>Reaction Test</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <style>
+        
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            
+        }
+    
+        #square {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            display: none;
+            position: relative;
+        }
+        
+    </style>
+    
+</head>
+
+<body>
+<div>
+    
+    <center><h1>Test your reaction speed!</h1></center>
+    
+    <center><p>Your reaction time : <span id="time">????</span></p></center>
+    
+    <!-- <div id="square"></div> -->
+    
+    <center><img id="logo" src="RCUcAms.png" align="middle" height="100px"></center>
+    
+    <script type="text/javascript">
+        
+        function colorGenerator() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        
+        var clicked_time;
+        var display_time;
+        var reaction_time;
+        
+        
+        function makeBox() {
+            
+            var timer = Math.random();
+            timer = timer * 3000;
+
+            setTimeout(function() {
+                
+                if (Math.random() > 0.5) {
+                    document.getElementById("square").style.borderRadius="100px";
+                } else {
+                    document.getElementById("square").style.borderRadius="0";
+                }
+                
+                
+                var vertical = Math.random();
+                var horizontal = Math.random();
+                
+                vertical = vertical * 300;
+                horizontal = horizontal * 700;
+                
+                document.getElementById("square").style.top=vertical+"px";
+                document.getElementById("square").style.left=horizontal+"px";
+                
+                document.getElementById("square").style.backgroundColor=colorGenerator();
+                document.getElementById("square").style.display="block";
+            display_time = Date.now();
+            }, timer);
+        }
+        
+        // Shapes
+        document.getElementById("square").onclick=function(){
+            clicked_time = Date.now();
+            reaction_time = (clicked_time - display_time) / 1000;
+            document.getElementById("time").innerHTML=reaction_time+" seconds!";
+            this.style.display="none";
+            makeBox();
+        }
+        
+        makeBox();
+        
+        
+    </script>
+    
+</div>
+</body>
+</html>
